@@ -4,8 +4,10 @@ P     H     I     N     G
 
 
 
-
-
+Mar. 3, 2016 - Phing 2.4.15
+---------------------------
+Fixes #1027 RegexpMapper uses deprecated PREG_REPLACE_EVAL
+Removed PHP4-style constructor from parser/Location 
 
 
 Nov. 29, 2012 - Phing 2.4.14

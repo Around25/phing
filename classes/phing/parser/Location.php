@@ -28,9 +28,8 @@
  * @access    public
  * @package   phing.parser
  */
-
-class Location {
-
+class Location
+{
     private $fileName;
     private $lineNumber;
     private $columnNumber;
@@ -43,7 +42,8 @@ class Location {
      * @param  integer the column number
      * @access public
      */
-    function Location($fileName = null, $lineNumber = null, $columnNumber = null) {
+    public function __construct($fileName = null, $lineNumber = null, $columnNumber = null)
+    {
         $this->fileName = $fileName;
         $this->lineNumber = $lineNumber;
         $this->columnNumber = $columnNumber;
@@ -58,19 +58,22 @@ class Location {
      * @return string the string representation of this Location object
      * @access public
      */
-    function toString() {
+    public function toString()
+    {
         $buf = "";
         if ($this->fileName !== null) {
-            $buf.=$this->fileName;
+            $buf .= $this->fileName;
             if ($this->lineNumber !== null) {
-                $buf.= ":".$this->lineNumber;
+                $buf .= ":" . $this->lineNumber;
             }
-            $buf.=":".$this->columnNumber;
+            $buf .= ":" . $this->columnNumber;
         }
-        return (string) $buf;
+
+        return (string)$buf;
     }
 
-    function __toString () {
-      return $this->toString();
+    public function __toString()
+    {
+        return $this->toString();
     }
 }

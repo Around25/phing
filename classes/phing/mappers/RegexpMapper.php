@@ -80,18 +80,23 @@ class RegexpMapper implements FileNameMapper {
      * @param string $source The source filename.
      */
     private function replaceReferences($source) {
-        
+
         // FIXME
         // Can't we just use engine->replace() to handle this?  the Preg engine
         // will automatically convert \1 references to $1
-        
+
         // the expression has already been processed (when ->matches() was run in Main())
         // so no need to pass $source again to the engine.
-        $groups = (array) $this->reg->getGroups();            
-        
-        // replace \1 with value of $groups[1] and return the modified "to" string
-        return preg_replace('/\\\([\d]+)/e', "\$groups[$1]", $this->to);            
-    }
-    
-}
 
+        // replace \1 with value of reg->getGroup(1) and return the modified "to" string
+        return preg_replace_callback('/\\\([\d]+)/', array($this, 'replaceReferencesCallback'), $this->to);
+    }
+
+    /**
+     * Gets the matched group from the Regexp engine.
+     * @param array $matches Matched elements.
+     */
+    private function replaceReferencesCallback($matches) {
+        return (string) $this->reg->getGroup($matches[1]);
+    }
+}
